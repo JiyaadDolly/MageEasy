@@ -1,0 +1,100 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magento\Framework\View\Element\AbstractBlock $block
+ */
+
+/**
+ * @var \MageEasy\DevTools\Helper\Config $config
+ */
+$config = $this->helper('MageEasy\DevTools\Helper\Config');
+?>
+
+<form method="post" action="" id="login-form" data-mage-init='{"form": {}, "validation": {}}' autocomplete="off">
+    <fieldset class="admin__fieldset">
+        <legend class="admin__legend">
+            <span><?= $block->escapeHtml(__('Welcome, please sign in!')) ?></span>
+        </legend><br/>
+        <input name="form_key" type="hidden" value="<?= $block->escapeHtmlAttr($block->getFormKey()) ?>" />
+        <div class="admin__field _required field-username">
+            <label for="username" class="admin__field-label">
+                <span><?= $block->escapeHtml(__('Username')) ?></span>
+            </label>
+            <div class="admin__field-control">
+
+                <?php if ($config->adminLoginGetUsers()): ?>
+                    <select name="login[username]"
+                            style="width: 100%"
+                            id="username"
+                            data-validate="{required:true}"
+                            placeholder="<?= $block->escapeHtmlAttr(__('user name')) ?>"
+                            class="admin__control-select">
+                        <option>
+                            Select a user..
+                        </option>
+                        <?php foreach ($config->adminLoginGetUsers() as $user): ?>
+                            <option data-password="<?= $user->password ?>" value="<?= $user->username; ?>">
+                                <?= $user->role; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php else: ?>
+                    <input id="username"
+                           class="admin__control-text"
+                           type="text"
+                           name="login[username]"
+                           autofocus
+                           value=""
+                           data-validate="{required:true}"
+                           placeholder="<?= $block->escapeHtmlAttr(__('user name')) ?>"
+                           autocomplete="off"
+                    />
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <?php if ($config->adminLoginGetUsers()): ?>
+            <div class="admin__field _required field-password" style="margin: 0">
+                <label for="login" class="admin__field-label" style="display: none">
+                    <span><?= $block->escapeHtml(__('Password')) ?></span>
+                </label>
+                <div class="admin__field-control">
+                    <input id="login"
+                           class="admin__control-text"
+                           type="hidden"
+                           name="login[password]"
+                           data-validate="{required:true}"
+                           value=""
+                           placeholder="<?= $block->escapeHtmlAttr(__('password')) ?>"
+                           autocomplete="off"
+                    />
+                </div>
+            </div>
+        <?php else: ?>
+            <div class="admin__field _required field-password">
+                <label for="login" class="admin__field-label">
+                    <span><?= $block->escapeHtml(__('Password')) ?></span>
+                </label>
+                <div class="admin__field-control">
+                    <input id="login"
+                           class="admin__control-text"
+                           type="password"
+                           name="login[password]"
+                           data-validate="{required:true}"
+                           value=""
+                           placeholder="<?= $block->escapeHtmlAttr(__('password')) ?>"
+                           autocomplete="off"
+                    />
+                </div>
+            </div>
+        <?php endif; ?>
+        <?= $block->getChildHtml('form.additional.info') ?>
+        <div class="form-actions">
+            <?= $block->getChildHtml('form.buttons') ?>
+        </div>
+    </fieldset>
+</form>
