@@ -1,0 +1,21 @@
+{
+    "name": "mageeasy/devtools",
+    "description": "Development tools created for Magento 2",
+    "type": "magento2-module",
+    "license": "MIT",
+    "version": "1.0.1",
+    "authors": [
+        {
+            "name": "MageEasy",
+            "email": "jiyaad.dolly@gmail.com"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MageEasy\\Devtools\\": ""
+        }
+    }
+}
