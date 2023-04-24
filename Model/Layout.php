@@ -1,5 +1,5 @@
 <?php
-namespace MageDev\DevTools\Model;
+namespace MageEasy\DevTools\Model;
 
 class Layout implements \Magento\Framework\Event\ObserverInterface
 {
