@@ -29,7 +29,6 @@ class Cache extends Action
         Context $context,
         JsonFactory $resultJsonFactory,
         CacheAlias $cacheHelper
-
     ) {
         $this->_resultJsonFactory = $resultJsonFactory;
         $this->_cacheHelper = $cacheHelper;
@@ -48,30 +47,24 @@ class Cache extends Action
         $key = $this->getRequest()->getParam('key');
         $value = $this->getRequest()->getParam('value');
 
-        if($key == "refresh_cache") {
-
+        if ($key == "refresh_cache") {
             $message = "Cache has been refreshed";
             $this->_cacheHelper->refreshCache();
         }
 
-        if($key == "refresh_cache_single") {
-
+        if ($key == "refresh_cache_single") {
             $message = $value . " cache has been refreshed";
             $this->_cacheHelper->refreshCacheByType($value);
         }
 
-        if($key == "toggle_status") {
-
+        if ($key == "toggle_status") {
             $type = $this->getRequest()->getParam('type');
 
             $message = $type . " cache type status has been updated to " . $value;
 
-            if($value == "false")
-            {
+            if ($value == "false") {
                 $this->_cacheHelper->setEnabled($type, 0);
-            }
-            else
-            {
+            } else {
                 $this->_cacheHelper->setEnabled($type, 1);
                 $this->_cacheHelper->refreshCacheByType($type);
             }

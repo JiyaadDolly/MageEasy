@@ -2,15 +2,25 @@
 
 namespace MageEasy\DevTools\Model\Source;
 
+use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
+use Magento\Framework\App\Filesystem\DirectoryList;
 
 class CustomerMapper extends AbstractFieldArray
 {
+    /**
+     * @var DirectoryList
+     */
     protected $_directoryList;
 
+    /**
+     * @param DirectoryList $directoryList
+     * @param Context $context
+     * @param $data
+     */
     public function __construct(
-        \Magento\Framework\App\Filesystem\DirectoryList $directoryList,
-        \Magento\Backend\Block\Template\Context $context,
+        DirectoryList $directoryList,
+        Context       $context,
         $data = []
     ) {
         $this->_directoryList = $directoryList;
@@ -50,10 +60,10 @@ class CustomerMapper extends AbstractFieldArray
             )->toHtml();
         }
 
-            return '<input type="text" id="' . $this->_getCellInputElementId(
-                '<%- _id %>',
-                $columnName
-            ) .
+        return '<input type="text" id="' . $this->_getCellInputElementId(
+            '<%- _id %>',
+            $columnName
+        ) .
                 '"' .
                 ' name="' .
                 $inputName .

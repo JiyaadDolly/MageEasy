@@ -1,11 +1,19 @@
 <?php
 namespace MageEasy\DevTools\Plugin\Magento\Backend\Block;
 
+use MageEasy\DevTools\Helper\Config;
+
 class Template
 {
+    /**
+     * @var Config
+     */
     protected $_config;
 
-    public function __construct(\MageEasy\DevTools\Helper\Config $config)
+    /**
+     * @param Config $config
+     */
+    public function __construct(Config $config)
     {
         $this->_config = $config;
     }

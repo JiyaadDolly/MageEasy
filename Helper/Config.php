@@ -2,16 +2,25 @@
 
 namespace MageEasy\DevTools\Helper;
 
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Framework\App\Helper\Context;
 use Magento\Store\Model\ScopeInterface;
 
 class Config extends AbstractHelper
 {
+    /**
+     * @var ScopeConfigInterface
+     */
     protected $_scopeConfig;
 
+    /**
+     * @param Context $context
+     * @param ScopeConfigInterface $scopeConfig
+     */
     public function __construct(
-        \Magento\Framework\App\Helper\Context $context,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+        Context                                            $context,
+        ScopeConfigInterface $scopeConfig
     ) {
         parent::__construct($context);
         $this->_scopeConfig = $scopeConfig;

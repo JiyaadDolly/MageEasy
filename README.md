@@ -1,5 +1,3 @@
-## INSTALLATION
-
 ### COMPOSER
 #### INSTALLATION
 To install the extension run the following command:
@@ -10,3 +8,13 @@ To install the extension run the following command:
 To update the extension run the following command:
 
 `composer update mageeasy/devtools`
+
+
+### LOCAL INSTALLATION
+
+From the Magento root, run the following command:
+
+`sudo mkdir -p app/code/MageEasy/DevTools`
+
+Then clone the repository into the folder.
+

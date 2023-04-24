@@ -2,16 +2,26 @@
 
 namespace MageEasy\DevTools\Model\Source;
 
+use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
+use Magento\Framework\App\Filesystem\DirectoryList;
 
 class AdminLoginMapper extends AbstractFieldArray
 {
+    /**
+     * @var DirectoryList
+     */
     protected $_directoryList;
 
+    /**
+     * @param DirectoryList $directoryList
+     * @param Context $context
+     * @param $data
+     */
     public function __construct(
-        \Magento\Framework\App\Filesystem\DirectoryList $directoryList,
-        \Magento\Backend\Block\Template\Context $context,
-        $data = []
+        DirectoryList $directoryList,
+        Context       $context,
+                      $data = []
     ) {
         $this->_directoryList = $directoryList;
         parent::__construct($context, $data);

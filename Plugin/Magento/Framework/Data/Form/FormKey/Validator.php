@@ -2,11 +2,19 @@
 
 namespace MageEasy\DevTools\Plugin\Magento\Framework\Data\Form\FormKey;
 
+use Magento\Framework\App\RequestInterface;
+
 class Validator
 {
+    /**
+     * @var RequestInterface
+     */
     private $_request;
 
-    public function __construct(\Magento\Framework\App\RequestInterface $request)
+    /**
+     * @param RequestInterface $request
+     */
+    public function __construct(RequestInterface $request)
     {
         $this->_request = $request;
     }

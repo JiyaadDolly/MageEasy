@@ -3,14 +3,13 @@
 namespace MageEasy\DevTools\Helper;
 
 use Magento\Framework\App\Cache\Frontend\Pool;
+use Magento\Framework\App\Cache\Manager;
 use Magento\Framework\App\Cache\TypeListInterface;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
-use Magento\Framework\App\Cache\Manager;
 
 class Cache extends AbstractHelper
 {
-
     /**
      * @var TypeListInterface
      */
@@ -30,14 +29,14 @@ class Cache extends AbstractHelper
      * @param Context $context
      * @param TypeListInterface $cacheTypeList
      * @param Pool $cacheFrontendPool
+     * @param Manager $cacheManager
      */
     public function __construct(
         Context $context,
         TypeListInterface $cacheTypeList,
         Pool $cacheFrontendPool,
         Manager $cacheManager
-    )
-    {
+    ) {
         parent::__construct($context);
 
         $this->_cacheTypeList = $cacheTypeList;
@@ -49,8 +48,7 @@ class Cache extends AbstractHelper
     {
         $types = $this->getAvailableTypes();
 
-        foreach ($types as $cacheKey => $type)
-        {
+        foreach ($types as $cacheKey => $type) {
             $this->_cacheTypeList->cleanType($cacheKey);
         }
     }
@@ -60,16 +58,11 @@ class Cache extends AbstractHelper
         $cacheTypes = $this->_cacheTypeList->getTypes();
         $invalidatedCacheTypes = $this->_cacheTypeList->getInvalidated();
 
-        foreach ($cacheTypes as $type)
-        {
-            foreach ($invalidatedCacheTypes as $invalidType)
-            {
-                if($type->getId() == $invalidType->getId())
-                {
+        foreach ($cacheTypes as $type) {
+            foreach ($invalidatedCacheTypes as $invalidType) {
+                if ($type->getId() == $invalidType->getId()) {
                     $type->setInvalidated(1);
-                }
-                else
-                {
+                } else {
                     $type->setInvalidated(0);
                 }
             }
@@ -78,13 +71,13 @@ class Cache extends AbstractHelper
         return $cacheTypes;
     }
 
-    public function refreshCacheByType($type) {
-
+    public function refreshCacheByType($type)
+    {
         $this->_cacheTypeList->cleanType($type);
     }
 
-    public function setEnabled($type, $isEnabled) {
-
+    public function setEnabled($type, $isEnabled)
+    {
         return $this->_cacheManager->setEnabled([$type], $isEnabled);
     }
 }

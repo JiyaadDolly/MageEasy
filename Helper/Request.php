@@ -41,8 +41,7 @@ class Request extends AbstractHelper
         State                    $appState,
         FrontNameResolver        $frontNameResolver,
         ProductMetadataInterface $productMetadata
-    )
-    {
+    ) {
         parent::__construct($context);
 
         $this->_context = $context;

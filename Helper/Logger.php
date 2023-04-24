@@ -3,10 +3,14 @@
 namespace MageEasy\DevTools\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Framework\App\Helper\Context;
 
 class Logger extends AbstractHelper
 {
-    public function __construct(\Magento\Framework\App\Helper\Context $context)
+    /**
+     * @param Context $context
+     */
+    public function __construct(Context $context)
     {
         parent::__construct($context);
     }

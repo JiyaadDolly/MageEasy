@@ -1,26 +1,46 @@
 <?php
 namespace MageEasy\DevTools\Model;
 
-class Layout implements \Magento\Framework\Event\ObserverInterface
+use MageEasy\DevTools\Helper\Config;
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
+
+class Layout implements ObserverInterface
 {
+    /**
+     * @var RequestInterface
+     */
     protected $_request;
+
+    /**
+     * @var DirectoryList
+     */
     protected $_directoryList;
+
+    /**
+     * @var Config
+     */
     protected $_config;
 
+    /**
+     * @param RequestInterface $request
+     * @param DirectoryList $directoryList
+     * @param Config $config
+     */
     public function __construct(
-        \Magento\Framework\App\RequestInterface $request,
-        \Magento\Framework\App\Filesystem\DirectoryList $directoryList,
-        \MageEasy\DevTools\Helper\Config $config
+        RequestInterface                 $request,
+        DirectoryList                    $directoryList,
+        Config $config
     ) {
-
         $this->_request = $request;
         $this->_directoryList = $directoryList;
         $this->_config = $config;
     }
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(Observer $observer)
     {
         if ($this->_config->isLayoutLoggerEnabled()) {
-
             $path = $this->_directoryList->getPath('log') . "/layouts/";
 
             if (!is_dir($path)) {
@@ -43,7 +63,6 @@ class Layout implements \Magento\Framework\Event\ObserverInterface
 
     private function getRouteNameAsFileName()
     {
-
         $moduleName = $this->_request->getModuleName();
         $controller = $this->_request->getControllerName();
         $action = $this->_request->getActionName();
@@ -53,8 +72,6 @@ class Layout implements \Magento\Framework\Event\ObserverInterface
 
     private function writeXMLtoFile($xml, $file)
     {
-
-
         $xmlObject = simplexml_load_string($xml);
         $xmlString = '';
         foreach ($xmlObject->layout as $key => $Item) {
