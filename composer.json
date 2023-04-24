@@ -3,7 +3,7 @@
     "description": "Development tools created for Magento 2",
     "type": "magento2-module",
     "license": "MIT",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "authors": [
         {
             "name": "MageEasy",
@@ -15,7 +15,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "MageEasy\\Devtools\\": ""
+            "MageEasy\\DevTools\\": ""
         }
     }
 }
