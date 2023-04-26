@@ -18,3 +18,7 @@ From the Magento root, run the following command:
 
 Then clone the repository into the folder.
 
+
+### INSPIRED BY
+- https://github.com/avstudnitz/AvS_ScopeHint2
+- https://github.com/vpietri/magento2-developer-quickdevbar
