@@ -9,6 +9,7 @@
     transition: linear 150ms;
     overflow: auto;
     display: none;
+    width: 470px;
 
     .debug-toolkit {
 
@@ -18,6 +19,20 @@
             color: white;
             font-size: 15px;
             margin-bottom: 15px;
+            cursor:pointer;
+            user-select: none;
+            position: relative;
+
+            .chevron {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+
+        .body {
+            display:none;
         }
 
         p.handle-title {

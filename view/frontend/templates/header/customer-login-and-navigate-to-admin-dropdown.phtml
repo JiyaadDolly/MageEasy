@@ -76,147 +76,181 @@ $cacheTypes = $block->getAvailableTypes();
             </div>
             <hr>
             <div class="section cache-management">
-                <p class="heading">Cache Management</p>
+                <p class="heading">
+                    <span>Cache Management</span>
+                    <img class="chevron"
+                         src="<?= $block->escapeHtml($block->getViewFileUrl('MageEasy_DevTools::images/chevron-down.svg')); ?>"
+                         data-chevrondown="<?= $block->escapeHtml($block->getViewFileUrl('MageEasy_DevTools::images/chevron-down.svg')); ?>"
+                         data-chevronup="<?= $block->escapeHtml($block->getViewFileUrl('MageEasy_DevTools::images/chevron-up.svg')); ?>"
+                         alt="chevron">
+                </p>
+                <div class="body">
+                    <button id="refresh-cache" class="action primary">Refresh Cache</button>
+                    <div class="column-container">
+                        <div class="column">
+                            <?php foreach ($cacheTypes as $type): ?>
+                                <div class="cache-item">
+                                    <button data-id="<?= $type->getId() ?>" class="action primary refresh-cache-single">Refresh</button>
+                                    <div class="toggle-switch-container">
+                                        <label class="toggle-switch">
+                                            <?php if($type->getStatus()): ?>
+                                                <input type="checkbox" class="cache-type" name="<?= $type->getId() ?>" checked="true"/>
+                                            <?php else: ?>
+                                                <input type="checkbox" class="cache-type" name="<?= $type->getId() ?>"/>
+                                            <?php endif; ?>
 
-                <button id="refresh-cache" class="action primary">Refresh Cache</button>
-
-                <div class="column-container">
-                    <div class="column">
-                        <?php foreach ($cacheTypes as $type): ?>
-                            <div class="cache-item">
-                                <button data-id="<?= $type->getId() ?>" class="action primary refresh-cache-single">Refresh</button>
-                                <div class="toggle-switch-container">
-                                    <label class="toggle-switch">
-                                        <?php if($type->getStatus()): ?>
-                                            <input type="checkbox" class="cache-type" name="<?= $type->getId() ?>" checked="true"/>
-                                        <?php else: ?>
-                                            <input type="checkbox" class="cache-type" name="<?= $type->getId() ?>"/>
-                                        <?php endif; ?>
-
-                                        <?php if($type->getInvalidated()): ?>
-                                            <div class="invalidated" title="This cache item is invalidated and needs to be refreshed."></div>
-                                        <?php else: ?>
-                                            <div></div>
-                                        <?php endif; ?>
-                                    </label>
-                                </div>
-                                <span class="title" data-id="<?= $type->getId() ?>">
+                                            <?php if($type->getInvalidated()): ?>
+                                                <div class="invalidated" title="This cache item is invalidated and needs to be refreshed."></div>
+                                            <?php else: ?>
+                                                <div></div>
+                                            <?php endif; ?>
+                                        </label>
+                                    </div>
+                                    <span class="title" data-id="<?= $type->getId() ?>">
                                     <span><?= $type->getCacheType() ?></span>
                                     <small>(<?= $type->getId() ?>)</small>
                                 </span>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="section">
+                <p class="heading">
+                    <img class="chevron"
+                         src="<?= $block->escapeHtml($block->getViewFileUrl('MageEasy_DevTools::images/chevron-down.svg')); ?>"
+                         data-chevrondown="<?= $block->escapeHtml($block->getViewFileUrl('MageEasy_DevTools::images/chevron-down.svg')); ?>"
+                         data-chevronup="<?= $block->escapeHtml($block->getViewFileUrl('MageEasy_DevTools::images/chevron-up.svg')); ?>"
+                         alt="chevron">
+                    <span>Store Information</span>
+                </p>
+                <div class="body">
+                    <div class="column-container">
+                        <div class="column">
+                            <div class="container">
+                                <p class="title">Website Id</p>
+                                <small class="value"><?= $website->getId(); ?></small>
                             </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="section">
-                <p class="heading">Store Information</p>
-                <div class="column-container">
-                    <div class="column">
-                        <div class="container">
-                            <p class="title">Website Id</p>
-                            <small class="value"><?= $website->getId(); ?></small>
+                            <div class="container">
+                                <p class="title">Website Name</p>
+                                <small class="value"><?= $website->getName() ?></small>
+                            </div>
+                            <div class="container">
+                                <p class="title">Store Id</p>
+                                <small class="value"><?= $store->getId() ?></small>
+                            </div>
                         </div>
-                        <div class="container">
-                            <p class="title">Website Name</p>
-                            <small class="value"><?= $website->getName() ?></small>
-                        </div>
-                        <div class="container">
-                            <p class="title">Store Id</p>
-                            <small class="value"><?= $store->getId() ?></small>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="container">
-                            <p class="title">Store Name</p>
-                            <small class="value"><?= $store->getName() ?></small>
-                        </div>
-                        <div class="container">
-                            <p class="title">Store Code</p>
-                            <small class="value"><?= $store->getCode(); ?></small>
+                        <div class="column">
+                            <div class="container">
+                                <p class="title">Store Name</p>
+                                <small class="value"><?= $store->getName() ?></small>
+                            </div>
+                            <div class="container">
+                                <p class="title">Store Code</p>
+                                <small class="value"><?= $store->getCode(); ?></small>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <hr>
             <div class="section">
-                <p class="heading">Request Information</p>
-                <div class="container" >
-                    <p class="title"><?= $requestInfo["base_url"]["name"] ?></p>
-                    <small class="value"><?= $requestInfo["base_url"]["value"] ?></small>
-                </div>
-                <div class="container" >
-                    <p class="title"><?= $requestInfo["backend_url"]["name"] ?></p>
-                    <small class="value"><?= $requestInfo["backend_url"]["value"] ?></small>
-                </div>
-                <div class="column-container">
-                    <div class="column">
-                        <div class="container" >
-                            <p class="title"><?= $requestInfo["path_info"]["name"] ?></p>
-                            <small class="value"><?= $requestInfo["path_info"]["value"] ?></small>
-                        </div>
-                        <div class="container" >
-                            <p class="title"><?= $requestInfo["module_name"]["name"] ?></p>
-                            <small class="value"><?= $requestInfo["module_name"]["value"] ?></small>
-                        </div>
-                        <div class="container" >
-                            <p class="title"><?= $requestInfo["controller"]["name"] ?></p>
-                            <small class="value"><?= $requestInfo["controller"]["value"] ?></small>
-                        </div>
-                        <div class="container" >
-                            <p class="title"><?= $requestInfo["action"]["name"] ?></p>
-                            <small class="value"><?= $requestInfo["action"]["value"] ?></small>
-                        </div>
-                        <div class="container" >
-                            <p class="title"><?= $requestInfo["full_action"]["name"] ?></p>
-                            <small class="value"><?= $requestInfo["full_action"]["value"] ?></small>
-                        </div>
+                <p class="heading">
+                    <img class="chevron"
+                         src="<?= $block->escapeHtml($block->getViewFileUrl('MageEasy_DevTools::images/chevron-down.svg')); ?>"
+                         data-chevrondown="<?= $block->escapeHtml($block->getViewFileUrl('MageEasy_DevTools::images/chevron-down.svg')); ?>"
+                         data-chevronup="<?= $block->escapeHtml($block->getViewFileUrl('MageEasy_DevTools::images/chevron-up.svg')); ?>"
+                         alt="chevron">
+                    <span>Request Information</span>
+                </p>
+                <div class="body">
+                    <div class="container" >
+                        <p class="title"><?= $requestInfo["base_url"]["name"] ?></p>
+                        <small class="value"><?= $requestInfo["base_url"]["value"] ?></small>
                     </div>
-                    <div class="column">
-                        <div class="container" >
-                            <p class="title"><?= $requestInfo["route"]["name"] ?></p>
-                            <small class="value"><?= $requestInfo["route"]["value"] ?></small>
-                        </div>
-                        <div class="container" >
-                            <p class="title"><?= $requestInfo["area"]["name"] ?></p>
-                            <small class="value"><?= $requestInfo["area"]["value"] ?></small>
-                        </div>
-                        <div class="container" >
-                            <p class="title"><?= $requestInfo["client_ip"]["name"] ?></p>
-                            <small class="value"><?= $requestInfo["client_ip"]["value"] ?></small>
-                        </div>
-                        <div class="container" >
-                            <p class="title"><?= $requestInfo["magento_version"]["name"] ?></p>
-                            <small class="value"><?= $requestInfo["magento_version"]["value"] ?></small>
-                        </div>
-                        <div class="container" >
-                            <p class="title"><?= $requestInfo["mode"]["name"] ?></p>
-                            <small class="value"><?= $requestInfo["mode"]["value"] ?></small>
-                        </div>
-                        <?php if(isset($requestInfo["before_forward"])): ?>
+                    <div class="container" >
+                        <p class="title"><?= $requestInfo["backend_url"]["name"] ?></p>
+                        <small class="value"><?= $requestInfo["backend_url"]["value"] ?></small>
+                    </div>
+                    <div class="column-container">
+                        <div class="column">
                             <div class="container" >
-                                <p class="title"><?= $requestInfo["before_forward"]["name"] ?></p>
-                                <small class="value"><?= $requestInfo["before_forward"]["value"] ?></small>
+                                <p class="title"><?= $requestInfo["path_info"]["name"] ?></p>
+                                <small class="value"><?= $requestInfo["path_info"]["value"] ?></small>
                             </div>
-                        <?php endif; ?>
-                        <?php if(isset($requestInfo["params"])): ?>
                             <div class="container" >
-                                <p class="title"><?= $requestInfo["params"]["name"] ?></p>
-                                <small class="value"><?= $requestInfo["params"]["value"] ?></small>
+                                <p class="title"><?= $requestInfo["module_name"]["name"] ?></p>
+                                <small class="value"><?= $requestInfo["module_name"]["value"] ?></small>
                             </div>
-                        <?php endif; ?>
+                            <div class="container" >
+                                <p class="title"><?= $requestInfo["controller"]["name"] ?></p>
+                                <small class="value"><?= $requestInfo["controller"]["value"] ?></small>
+                            </div>
+                            <div class="container" >
+                                <p class="title"><?= $requestInfo["action"]["name"] ?></p>
+                                <small class="value"><?= $requestInfo["action"]["value"] ?></small>
+                            </div>
+                            <div class="container" >
+                                <p class="title"><?= $requestInfo["full_action"]["name"] ?></p>
+                                <small class="value"><?= $requestInfo["full_action"]["value"] ?></small>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="container" >
+                                <p class="title"><?= $requestInfo["route"]["name"] ?></p>
+                                <small class="value"><?= $requestInfo["route"]["value"] ?></small>
+                            </div>
+                            <div class="container" >
+                                <p class="title"><?= $requestInfo["area"]["name"] ?></p>
+                                <small class="value"><?= $requestInfo["area"]["value"] ?></small>
+                            </div>
+                            <div class="container" >
+                                <p class="title"><?= $requestInfo["client_ip"]["name"] ?></p>
+                                <small class="value"><?= $requestInfo["client_ip"]["value"] ?></small>
+                            </div>
+                            <div class="container" >
+                                <p class="title"><?= $requestInfo["magento_version"]["name"] ?></p>
+                                <small class="value"><?= $requestInfo["magento_version"]["value"] ?></small>
+                            </div>
+                            <div class="container" >
+                                <p class="title"><?= $requestInfo["mode"]["name"] ?></p>
+                                <small class="value"><?= $requestInfo["mode"]["value"] ?></small>
+                            </div>
+                            <?php if(isset($requestInfo["before_forward"])): ?>
+                                <div class="container" >
+                                    <p class="title"><?= $requestInfo["before_forward"]["name"] ?></p>
+                                    <small class="value"><?= $requestInfo["before_forward"]["value"] ?></small>
+                                </div>
+                            <?php endif; ?>
+                            <?php if(isset($requestInfo["params"])): ?>
+                                <div class="container" >
+                                    <p class="title"><?= $requestInfo["params"]["name"] ?></p>
+                                    <small class="value"><?= $requestInfo["params"]["value"] ?></small>
+                                </div>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
             <hr>
             <div class="section">
-                <p class="heading">Handles</p>
-                <div class="column-container">
-                    <div class="column">
-                        <?php foreach ($block->getHandles() as $handle): ?>
-                            <p class="handle-title"><?= $handle ?></p>
-                        <?php endforeach; ?>
+                <p class="heading">
+                    <img class="chevron"
+                         src="<?= $block->escapeHtml($block->getViewFileUrl('MageEasy_DevTools::images/chevron-down.svg')); ?>"
+                         data-chevrondown="<?= $block->escapeHtml($block->getViewFileUrl('MageEasy_DevTools::images/chevron-down.svg')); ?>"
+                         data-chevronup="<?= $block->escapeHtml($block->getViewFileUrl('MageEasy_DevTools::images/chevron-up.svg')); ?>"
+                         alt="chevron">
+                    <span>Handles</span>
+                </p>
+                <div class="body">
+                    <div class="column-container">
+                        <div class="column">
+                            <?php foreach ($block->getHandles() as $handle): ?>
+                                <p class="handle-title"><?= $handle ?></p>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
             </div>

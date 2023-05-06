@@ -256,5 +256,24 @@ require(["jquery", "mage/url"], function($, url) {
         const templateHints = $('.template-hints-activate');
         const pathHintValue = templateHints.data('pathintvalue');
         templateHints.attr('href', window.location.href  + "?templatehints=" + pathHintValue);
+
+        // ACCORDION
+        $(document).on('click', ".debug-toolkit .section .heading", function() {
+
+            if($(this).closest('.section').find('.body').css('display') == 'none')
+            {
+                $(this).closest('.section').find('.body').show();
+                $(this).find('img.chevron').attr('src',
+                    $(this).find('img.chevron').data('chevronup')
+                );
+            }
+            else
+            {
+                $(this).closest('.section').find('.body').hide();
+                $(this).find('img.chevron').attr('src',
+                    $(this).find('img.chevron').data('chevrondown')
+                );
+            }
+        });
     });
 });
